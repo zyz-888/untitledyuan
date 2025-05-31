@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>给罗媛元的小网站</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background-image: url("https://images.unsplash.com/photo-1506318137071-a8e063b4bec0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2093&q=80");
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        color: #fff;
+        padding: 20px;
+        position: relative;
+        overflow-x: hidden;
+      }
+
+      /* 背景遮罩层 */
+      body::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: -1;
+      }
+
+      .container {
+        max-width: 1000px;
+        width: 100%;
+        text-align: center;
+        padding: 40px;
+        background: rgba(25, 25, 35, 0.85);
+        border-radius: 20px;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+        backdrop-filter: blur(10px);
+        margin: 20px 0;
+      }
+
+      h1 {
+        font-size: 4.5rem;
+        margin-bottom: 20px;
+        color: #ff7eb9;
+        text-shadow: 0 0 15px rgba(255, 126, 185, 0.6);
+        letter-spacing: 2px;
+        font-weight: 700;
+      }
+
+      .subtitle {
+        font-size: 1.8rem;
+        margin-bottom: 40px;
+        color: #a2d2ff;
+        font-weight: 300;
+      }
+
+      .content {
+        font-size: 1.2rem;
+        line-height: 1.8;
+        margin: 30px auto;
+        max-width: 800px;
+        padding: 0 20px;
+        text-align: left;
+        background: rgba(255, 255, 255, 0.1);
+        padding: 30px;
+        border-radius: 15px;
+        border-left: 4px solid #ff7eb9;
+      }
+
+      .image-gallery {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 30px;
+        margin: 40px 0;
+      }
+
+      .image-container {
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        overflow: hidden;
+        position: relative;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        border: 5px solid rgba(255, 255, 255, 0.2);
+        animation: float 8s ease-in-out infinite;
+      }
+
+      .image-container:nth-child(1) {
+        animation-delay: 0s;
+        background: linear-gradient(45deg, #ff7eb9, #ff65a3);
+      }
+
+      .image-container:nth-child(2) {
+        animation-delay: 1s;
+        background: linear-gradient(45deg, #7afcff, #5ce1e6);
+      }
+
+      .image-container:nth-child(3) {
+        animation-delay: 2s;
+        background: linear-gradient(45deg, #feff9c, #f9f871);
+      }
+
+      .image-container img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+      }
+
+      .image-container:hover img {
+        transform: scale(1.1);
+      }
+
+      .audio-player {
+        margin: 40px auto;
+        max-width: 500px;
+        background: rgba(255, 255, 255, 0.1);
+        padding: 20px;
+        border-radius: 15px;
+      }
+
+      .audio-title {
+        font-size: 1.5rem;
+        margin-bottom: 15px;
+        color: #a2d2ff;
+      }
+
+      audio {
+        width: 100%;
+        height: 50px;
+        background: rgba(0, 0, 0, 0.3);
+        border-radius: 30px;
+        padding: 5px;
+      }
+
+      audio::-webkit-media-controls-panel {
+        background: rgba(0, 0, 0, 0.3);
+        border-radius: 30px;
+      }
+
+      footer {
+        margin-top: 30px;
+        padding: 20px;
+        text-align: center;
+        font-size: 1rem;
+        color: rgba(255, 255, 255, 0.7);
+      }
+
+      /* 动画效果 */
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0) rotate(0deg);
+        }
+        25% {
+          transform: translateY(-15px) rotate(3deg);
+        }
+        50% {
+          transform: translateY(0) rotate(0deg);
+        }
+        75% {
+          transform: translateY(-10px) rotate(-3deg);
+        }
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      h1,
+      .subtitle,
+      .content,
+      .image-gallery,
+      .audio-player {
+        animation: fadeIn 1s ease-out forwards;
+      }
+
+      .image-gallery {
+        animation-delay: 0.3s;
+      }
+
+      .audio-player {
+        animation-delay: 0.6s;
+      }
+
+      /* 响应式设计 */
+      @media (max-width: 768px) {
+        h1 {
+          font-size: 3rem;
+        }
+
+        .subtitle {
+          font-size: 1.4rem;
+        }
+
+        .content {
+          font-size: 1rem;
+          padding: 20px;
+        }
+
+        .image-container {
+          width: 150px;
+          height: 150px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .container {
+          padding: 20px;
+        }
+
+        h1 {
+          font-size: 2.5rem;
+        }
+
+        .image-container {
+          width: 120px;
+          height: 120px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1 style="text-align: left;">罗媛元❤️</h1>
+      <div class="subtitle">to 我生活中最中二也最可爱的你</div>
+
+      <div class="content">
+        <p>亲爱的元元宝贝：</p>
+        <p>
+          祝你端午安康，也提前祝你儿童节快乐~更祝你每个周六都快乐
+        </p>
+        <p>
+          我在哈尔滨超级想你~今年暑假等我去找你玩呀！前两天翻到我们交头接耳被发现的照片，突然觉得好好笑。当时每天看到你我都很想笑，一对视就笑，每天都在笑。现在想想真的特别怀念，你是我回忆高中最想念的人，最想见的人。
+        </p>
+        <p>
+          快六月了，湖南应该很热吧，记得运动的时候也要注意防晒哦。我昨天刚学会建立个人网站，今天就给你也做了一个，虽然还很简陋，下次我会加上交互模式的！
+        </p>
+        <p>
+          PS：我本来想等学会电吉他再放音乐的，但终于意识到等我学会已经猴年马月了，所以是网上找的killkiss官方版...
+        </p>
+        <p>
+          PPS：本来音频是想放killkiss的，但是格式一直错误，嗯所以你先别点开了...我们学艺不精就是这样...
+        </p>
+      </div>
+
+      <div class="image-gallery">
+        <div class="image-container">
+          <img
+            src="image.png"
+            alt="回忆1"
+          />
+        </div>
+        <div class="image-container">
+          <img
+            src="beauty.jpg"
+            alt="回忆2"
+          />
+        </div>
+        <div class="image-container">
+          <img
+            src="meng.png"
+            alt="回忆3"
+          />
+        </div>
+        <div class="image-container">
+          <img
+            src="c3d436a0d0c4d1306cc4c5e9f86ad6f.png"
+            alt="回忆3"
+          />
+        </div>
+        <div class="image-container">
+          <img
+            src="birth.jpg"
+            alt="回忆3"
+          />
+        </div>
+        <div class="image-container">
+          <img
+            src="lianyiqun.jpg"
+            alt="回忆3"
+          />
+        </div>
+        <div class="image-container">
+          <img
+            src="05ffc4615f2bab639b3366d483aee92.png"
+            alt="回忆3"
+          />
+        </div>
+        <div class="image-container">
+          <img
+            src="qianjin.jpg"
+            alt="回忆3"
+          />
+        </div>
+      </div>
+
+      <div class="audio-player">
+        <div class="audio-title">music</div>
+        <audio controls loop>
+          <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" 
+                  type="audio/mpeg">
+          您的浏览器不支持音频播放。
+        </audio>
+      </div>
+    </div>
+
+    <footer>
+      <p>特别为你制作 ❤️ | 2025/5/30</p>
+    </footer>
+  </body>
+</html>
